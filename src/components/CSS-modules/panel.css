@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+*,*::after, *::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+.container{
+    width: 27%;
+    min-width: 300px;
+    background-color: #1E213A;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 25px;
+    gap: 20px;
+    transition: all ease 0.5s;
+}
+
+.container.hide{
+    left: -100%;
+}
+
+.container.show{
+    left: 0;
+}
+
+
+.close-icon{
+    cursor: pointer;
+}
+
+.container form{
+    width: 100%;
+}
+
+.container .input-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.container .search-input{
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    border: solid 1px #fff;
+    border-radius:2px;
+    width: 75%;
+}
+
+.container .search-input .search-icon{
+    position: relative;
+    top: 3px;
+    color: #fff;
+    display: inline;
+}
+
+.container .search-input input.form-control{
+    background-color: transparent;
+    border:none;
+    color: #ccc;
+    outline:none;
+    padding-left: 10px;
+}
+
+.container button.btn{
+    padding: 10px;
+    border:none;
+}
+
+button.btn-primary{
+    background-color: #3C47E9;
+    color: #fff;
+}
+
+.container ul.recent-searches{
+    list-style-type: none;
+    width: 100%;
+}
+
+.container .recent-search{
+    user-select: auto;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    border:solid 1px transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .recent-search a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.container .recent-search .go-to{
+    opacity:0;
+    transition: all ease 0.3s;
+    position: relative;
+    left: 5px;
+    color: #616475;
+}
+
+.container .recent-search:hover{
+    border: solid 1px #616475;
+}
+
+.container .recent-search:hover .go-to{
+    opacity:1;
+    left: 0;
+}
+
+
+@media screen and (max-width: 768px){
+    .container{
+        width: 100%;
+    }
+}

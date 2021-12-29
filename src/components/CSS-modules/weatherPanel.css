@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+*,*::after, *::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+.weather-panel{
+    min-width: 300px;
+    background-color: #1E213A;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 25px;
+    gap: 20px;
+    transition: all ease 0.5s;
+    color: #fff;
+    background-size: 145%;
+    background-repeat: no-repeat;
+    background-position: 50% 20%;
+    background-blend-mode: soft-light;
+}
+
+.weather-panel .panel-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.weather-panel .panel-buttons .btn{
+    padding: 10px;
+    border: none;
+    box-shadow: #1E213A 0px 4px 4px;
+    color: #fff;
+    background-color: #6E707A;
+    cursor: pointer;
+}
+
+.weather-panel .panel-buttons .btn-circle{
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+}
+
+.weather-panel >div{
+    width: 100%;
+    text-align: center;
+}
+
+.panel-img{
+    margin: 30px auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.panel-img img{
+    width: 60%;
+}
+
+.panel-temp p{
+    font-size: 6rem;
+    font-weight: bold;
+    display: inline;
+}
+
+.panel-temp span{
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.panel-weather{
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 20px auto;
+}
+
+.panel-info{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.panel-info .daytime{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
