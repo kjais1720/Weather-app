@@ -1,48 +1,35 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./CSS-modules/mainPanel.css";
 import WeatherCard from "./WeatherCard";
 import NavigationIcon from '@mui/icons-material/Navigation';
-import {windDir} from './convertDate';
+import {windDir, tempConversion} from './convertDate';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 export default function MainPanel(props){
-    // const weatherInfo = [
-    //     {
-    //         day:"Tomorrow",
-    //         img:"Clear.png",
-    //         high:16,
-    //         low:12
+    const [weeklyData, setWeeklyData] = useState([]);
 
-    //     },
-    //     {
-    //         day:"Sun, 26 Dec",
-    //         img:"Clear.png",
-    //         high:16,
-    //         low:12
+    useEffect(()=>{
+        setWeeklyData(props.data.weekData);
+    },[props.data]);
 
-    //     },
-    //     {
-    //         day:"Mon, 27 Dec",
-    //         img:"Clear.png",
-    //         high:16,
-    //         low:12
+    const [useCelsius, setUseCelsius] = useState(true);
 
-    //     },
-    //     {
-    //         day:"Tue, 28 Dec",
-    //         img:"Clear.png",
-    //         high:16,
-    //         low:12
+    function changeTemp(e){
+        const currUnit = useCelsius ? "°C" : "°F";
+        if (e.target.innerText === currUnit) return;
+        
+        setUseCelsius(!useCelsius);
+        
+        const unit = useCelsius ? "F" : "C";
+        const newData = weeklyData.map(day=>{
+            day.highT = tempConversion(day.highT, unit);
+            day.lowT = tempConversion(day.lowT, unit);
+            return day;
+        })
+        setWeeklyData(newData);
+    }
 
-    //     },
-    //     {
-    //         day:"Wed, 29 Dec",
-    //         img:"Clear.png",
-    //         high:16,
-    //         low:12
-
-    //     }
-    // ]
     function createCard(card,i){
         if(i>=1 && i<6)
         return(
@@ -57,15 +44,29 @@ export default function MainPanel(props){
             />
         )
     }
+    
 
     return(
         <main>
-            <div className="temp-buttons">
-                <button className="active">°C</button>
-                <button>°F</button>
-            </div>
+            <header>
+                <h1 className="location-city"><LocationOnIcon/> <span>{props.data.currCity}</span></h1>
+                <div className="temp-buttons">
+                    <button 
+                        className={useCelsius?"active":""}
+                        onClick={changeTemp}
+                    >
+                        °C
+                    </button>
+                    <button
+                        className={useCelsius?"":"active"}
+                        onClick={changeTemp}
+                    >
+                        °F
+                    </button> 
+                </div>
+            </header>
             <div className="weather-cards">
-                {props.data.weekData.map((e,i)=>createCard(e,i))}
+                {weeklyData.map((e,i)=>createCard(e,i))}
             </div>
             <div className="highlights">
                 <div className = "highlights-heading">
@@ -116,6 +117,10 @@ export default function MainPanel(props){
                 </div>
 
             </div>
+            <footer>
+                <p>Powered by <a href="https://openweathermap.org/">OpenWeatherMap</a></p>
+                <p>Made with <span>React</span> by <a href="https://krituraj-anand.vercel.app" target="_blank" rel="noreferrer">Krituraj Anand</a></p>
+            </footer>
         </main>
     )
 }

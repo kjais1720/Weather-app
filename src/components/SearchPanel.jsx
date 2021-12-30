@@ -6,14 +6,15 @@ import axios from "axios";
 import './CSS-modules/panel.css';
 
 export default function SearchPanel(props){
-    const [city, setCity] = useState("london, UK");
+    const [city, setCity] = useState("");
 
     async function locToCoord(){
-        const apiKey="6a1cd25a49b441cb8fa2042a370dca8f"
+        const apiKey=process.env.REACT_APP_GEOCODE_API;
         // const apiKey = "5067e7c41a514a1687754acb12d1c6f6";
         const path = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${apiKey}`;
         const {data} = await axios.get(path) 
         const coords = data.results[0].geometry;
+        // props.setLocation(city);
         return(coords)
     }
 
@@ -23,16 +24,15 @@ export default function SearchPanel(props){
 
     function submitHandler(e){
         e.preventDefault();
-        // props.meta(city);
         searchCity();
     }
 
     async function searchCity(){
         const coords = await locToCoord();
-        props.searchCity(coords);
+        props.searchCity(coords, city);
     }
 
-    const popularCities = ["New Delhi, In","London, UK", "New York, US"]
+    const popularCities = ["New Delhi","London", "New York"]
 
     function popSearch(cityName,i){
         return(

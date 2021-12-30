@@ -65,5 +65,18 @@ function windDir(deg){
           return "N";
 }
 
+function tempConversion(temp, type){
+  switch (type){
+    case "F":
+          let fahr = (temp * 9.0/5.0) + 32.0;
+          return fahr;
+    case "C":
+          let cels = (temp - 32.0) * 5.0/9.0; //Fahr to cels
+          return cels;
+    default:
+      return temp;
+  }
+}
 
-export {parseDate, convertDate, formatDate, windDir};
+
+export {parseDate, convertDate, formatDate, windDir, tempConversion};

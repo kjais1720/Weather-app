@@ -8,6 +8,8 @@ import {parseDate} from './components/convertDate';
 
 function App(){
 
+  const [showPanel, setShowPanel] = useState(false);
+
   const [parsedData, setParsedData] = useState({
     iconId:'',
     temp:0,
@@ -25,12 +27,12 @@ function App(){
     humidity:0,
     visibility:0,
     airPressure:0,
-    currDay: ''
+    currDay: '',
+    currCity:''
   })
 
 
-
-  function parseData(data){
+  function parseData(data, location){
 
     let iconId, temp, weatherDesc, weekData, windStatus, humidity, visibility, airPressure, currDay;
 
@@ -74,16 +76,22 @@ function App(){
       humidity:humidity,
       visibility:visibility,
       airPressure:airPressure,
-      currDay: currDay
+      currDay: currDay,
+      currCity:location
     })
 
   }
-
-  const [showPanel, setShowPanel] = useState(false);
-  // const apiKey = "1a5d4fa64530de9ba70e6efa3328fb83";
-  // const apiKey = "58894905874dab9b6eb25f144cbfb5f0"
-  const apiKey = "8ceb7094aafde1af43748692d3bbd91c";
+  console.log(process.env.REACT_APP_API_KEY);
+  const apiKey = process.env.REACT_APP_WEATHER_API;
   const apiUri = "https://api.openweathermap.org/data/2.5/onecall?";
+
+  function setCurrCity(city){
+    setParsedData(curr=>({
+      ...curr,
+      currCity:city
+    })
+    )
+  }
 
   function closePanel(){
     setShowPanel(false)
@@ -93,12 +101,12 @@ function App(){
     setShowPanel(true)
   }
 
-  function searchCity(coords){
+  function searchCity(coords,location){
     const unit="metric"
     const apiPath = apiUri+`lat=${coords.lat}&lon=${coords.lng}&exclude=hourly,alerts,minutely&units=${unit}&appid=${apiKey}`
     axios.get(apiPath)
           .then(res => {
-            parseData(res.data);
+            parseData(res.data,location);
           })
           .catch(err=>console.log(err))
   }
@@ -110,6 +118,7 @@ function App(){
           showPanel = {openPanel}
           searchLoc = {searchCity}
           data = {parsedData}
+          setLocation = {setCurrCity}
         />
         <MainPanel 
           data = {parsedData}
@@ -119,6 +128,7 @@ function App(){
           showPanel = {showPanel}
           closePanel = {closePanel}
           searchCity = {searchCity}
+          setLocation = {setCurrCity}
         />
     </div>
   );

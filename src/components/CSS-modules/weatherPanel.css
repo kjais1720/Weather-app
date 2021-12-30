@@ -8,19 +8,20 @@
 }
 
 .weather-panel{
-    min-width: 300px;
+    width: 350px;
     background-color: #1E213A;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 25px;
+    padding: 25px 25px 115px;
     gap: 20px;
     transition: all ease 0.5s;
     color: #fff;
-    background-size: 145%;
+    background-size: 125%;
     background-repeat: no-repeat;
-    background-position: 50% 20%;
+    background-position: 50% 10%;
     background-blend-mode: soft-light;
+
 }
 
 .weather-panel .panel-buttons{
@@ -54,7 +55,7 @@
 }
 
 .panel-img{
-    margin: 30px auto;
+    margin: 0 auto;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -93,3 +94,8 @@
     gap: 10px;
 }
 
+@media screen and (max-width:768px) {
+    .weather-panel{
+        width: 100%;
+    }
+}
