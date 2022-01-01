@@ -10,8 +10,8 @@ export default function WeatherCard(props){
                 <img src={`http://openweathermap.org/img/wn/${props.img}@2x.png`} alt={props.alt}/>
             </figure>
             <div className = "temps">
-                <span className = "high">{Math.round(props.high)}°C</span>
-                <span className = "low">{Math.round(props.low)}°C</span>
+                <span className = "high">{Math.round(props.high)}°{props.unit}</span>
+                <span className = "low">{Math.round(props.low)}°{props.unit}</span>
             </div>
         </div>
     )

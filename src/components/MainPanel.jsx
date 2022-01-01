@@ -41,6 +41,7 @@ export default function MainPanel(props){
                 high = {card.highT}
                 low = {card.lowT}
                 alt = {props.data.weatherDesc}
+                unit = {useCelsius ? "C" : "F"}
             />
         )
     }
